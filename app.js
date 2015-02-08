@@ -24,13 +24,13 @@ app.all('/*', function(req, res){
   client.create({
     index: 'slack',
     type: 'message',
-    id: channel + user + text,
+    id: channel + '-' + user + '-' + timestamp,
     ttl: 60 * 60 * 24 * 30,
     body: {
       channel: channel,
       user: user,
       text: text,
-      '@timestamp': new Date(timestamp)
+      '@timestamp': timestamp
     }
   }, function(error, response){
 
