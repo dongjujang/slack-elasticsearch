@@ -22,10 +22,9 @@ app.all('/*', function(req, res){
   if (!channel || !user || !text || !timestamp) return;
 
   client.create({
-    index: channel,
-    type: user,
-    id: timestamp,
-    timestamp: timestamp,
+    index: 'slack',
+    type: 'message',
+    id: channel + user + text,
     ttl: 60 * 60 * 24 * 30,
     body: {
       channel: channel,
