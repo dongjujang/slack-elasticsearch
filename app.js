@@ -4,6 +4,10 @@ var elasticsearch = require('elasticsearch');
 
 var app = express();
 var port = process.env.PORT || 8888;
+var client = new elasticsearch.Client({
+  host: (process.env.ELASTICSEARCH || 'localhost:9200'),
+  log: 'trace'
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -17,10 +21,19 @@ app.all('/*', function(req, res){
 
   if (!channel || !user || !text || !timestamp) return;
 
-  console.log(channel);
-  console.log(user);
-  console.log(text);
-  console.log(timestamp);
+  client.create({
+    index: 'slack',
+    type: 'slack',
+    id: channel + user + timestamp,
+    body: {
+      channel: channel,
+      user: user,
+      text: text,
+      timestamp: timestamp
+    }
+  }, function(error, response){
+       
+  });
 });
 
 app.listen(port);
