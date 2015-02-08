@@ -8,12 +8,19 @@ var port = process.env.PORT || 8888;
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.all('/*', function(req, res){
-  console.log(req.body.channel_name);
-  console.log(req.body.user_name);
-  console.log(req.body.text);
-  console.log(req.body.tiemstamp);
+  var channel = req.body.channel_name;
+  var user = req.body.user_name;
+  var text = req.body.text;
+  var timestamp = req.body.timestamp;
 
   res.send('');
+
+  if (!channel || !user || !text || !timestamp) return;
+
+  console.log(channel);
+  console.log(user);
+  console.log(text);
+  console.log(timestamp);
 });
 
 app.listen(port);
