@@ -24,6 +24,7 @@ app.all('/*', function(req, res){
   client.create({
     index: 'slack',
     type: 'message',
+    '@timestamp': timestamp,
     id: channel + user + text,
     ttl: 60 * 60 * 24 * 30,
     body: {
