@@ -30,7 +30,7 @@ app.all('/*', function(req, res){
       channel: channel,
       user: user,
       text: text,
-      '@timestamp': timestamp
+      timestamp: timestamp
     }
   }, function(error, response){
 
